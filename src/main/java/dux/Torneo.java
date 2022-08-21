@@ -24,73 +24,41 @@ public class Torneo{
 	public void setSetsTotales(double setsTotales){
 		SetsTotales = setsTotales;
 	}
-	private void jugarGame(Jugadores jugador1, Jugadores jugador2) {
+	private void JugarPunto(Jugadores jugador1,Jugadores jugador2) {
+		Random generator = new Random();
+		double numeroRandom = generator.nextDouble();
 		
-		while(jugador1.getPuntos()<56 && jugador2.getPuntos()<56) { 
-			Random generator = new Random();
-			double numeroRandom = generator.nextDouble();
-			
-				if((jugador1.getProbabilidadDeGanar()/100)!=0 && (jugador1.getProbabilidadDeGanar()/100)>numeroRandom) {
-					jugador1.sumarPunto();
-					if(jugador1.getPuntos()==55 &&jugador2.getPuntos()==55) {
-						jugador1.restarPunto();
-						jugador2.restarPunto();
-					}
+			if((jugador1.getProbabilidadDeGanar()/100)!=0 && (jugador1.getProbabilidadDeGanar()/100)>numeroRandom) {
+				jugador1.sumarPunto();
+				
+				if(jugador1.getPuntos()>40 && jugador2.getPuntos()<40) {
+					
 					System.out.println("Punto de "+jugador1.getNombre());
-					if(jugador1.getPuntos()<70) {
-						
-						if(jugador1.getPuntos()==55) {
-							if(jugador1.getSaca()==true) {	
-							System.out.print("*");
-							}
-							System.out.println(jugador1.getNombre()+": "+"AD"+ " /// Games: " + jugador1.getGamesGanados()+" /// Sets:" + jugador1.getSetsGanados());
-
-							if(jugador2.getSaca()==true) {
-								System.out.print("*");
-							}
-							System.out.println(jugador2.getNombre()+": "+jugador2.getPuntos()+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
-							System.out.println();
-						}
-						else {
-							if(jugador2.getPuntos()==55) {
-								
-								if(jugador1.getSaca()==true) {
-									System.out.print("*");
-								}
-								System.out.println(jugador1.getNombre()+": "+jugador1.getPuntos()+" /// Games: " + jugador1.getGamesGanados()+" /// Sets:" + jugador1.getSetsGanados());
-								if(jugador2.getSaca()==true) {
-									System.out.print("*");
-								}
-								System.out.println(jugador2.getNombre()+": AD"+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
-								System.out.println();
-								
-							}
-							else {
-								
-								if(jugador1.getSaca()==true) {
-									System.out.print("*");
-								}
-							System.out.println(jugador1.getNombre()+": "+jugador1.getPuntos()+" /// Games: " + jugador1.getGamesGanados()+" /// Sets:" + jugador1.getSetsGanados());
-							if(jugador2.getSaca()==true) {
-								System.out.print("*");
-							}
-							System.out.println(jugador2.getNombre()+": "+jugador2.getPuntos()+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
-							System.out.println();
-							}
-						}
-
-					}
+					return;
 				}
-				else {
-					jugador2.sumarPunto();
-					if(jugador1.getPuntos()==55 &&jugador2.getPuntos()==55) {
-						jugador1.restarPunto();
-						jugador2.restarPunto();
+				
+				if(jugador1.getPuntos()==55 &&jugador2.getPuntos()==55) {
+					jugador1.restarPunto();
+					jugador2.restarPunto();
+				}
+				System.out.println("Punto de "+jugador1.getNombre());
+				if(jugador1.getPuntos()<70) {
+					
+					if(jugador1.getPuntos()==55) {
+						if(jugador1.getSaca()==true) {	
+						System.out.print("*");
+						}
+						System.out.println(jugador1.getNombre()+": "+"AD"+ " /// Games: " + jugador1.getGamesGanados()+" /// Sets:" + jugador1.getSetsGanados());
+
+						if(jugador2.getSaca()==true) {
+							System.out.print("*");
+						}
+						System.out.println(jugador2.getNombre()+": "+jugador2.getPuntos()+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
+						System.out.println();
 					}
-					System.out.println("Punto de "+jugador2.getNombre());
-					if(jugador2.getPuntos()<70) {
-						
+					else {
 						if(jugador2.getPuntos()==55) {
+							
 							if(jugador1.getSaca()==true) {
 								System.out.print("*");
 							}
@@ -98,47 +66,107 @@ public class Torneo{
 							if(jugador2.getSaca()==true) {
 								System.out.print("*");
 							}
-							System.out.println(jugador2.getNombre()+": "+"AD"+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
+							System.out.println(jugador2.getNombre()+": AD"+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
 							System.out.println();
-							}
+							
+						}
 						else {
-							if(jugador1.getPuntos()==55) {
-								if(jugador1.getSaca()==true) {
-									System.out.print("*");
-								}
-								System.out.println(jugador1.getNombre()+": AD"+" /// Games: " + jugador1.getGamesGanados()+" /// Sets:" + jugador1.getSetsGanados());
-								
-								if(jugador2.getSaca()==true) {
-									System.out.print("*");
-								}System.out.println(jugador2.getNombre()+": "+jugador2.getPuntos()+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
-								System.out.println();
-							}
-							else {
-								if(jugador1.getSaca()==true) {
-									System.out.print("*");
-								}	
-							System.out.println(jugador1.getNombre()+": "+jugador1.getPuntos()+" /// Games: " + jugador1.getGamesGanados()+" /// Sets:" + jugador1.getSetsGanados());
-							if(jugador2.getSaca()==true) {
+							
+						
+						if(jugador1.getSaca()==true) {
+								System.out.print("*");
+						}	
+						System.out.println(jugador1.getNombre()+": "+jugador1.getPuntos()+" /// Games: " + jugador1.getGamesGanados()+" /// Sets:" + jugador1.getSetsGanados());
+						if(jugador2.getSaca()==true) {
+							System.out.print("*");
+						}
+						System.out.println(jugador2.getNombre()+": "+jugador2.getPuntos()+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
+						
+						System.out.println();
+						}
+					}
+
+				}
+			}
+			else {
+				jugador2.sumarPunto();
+				if(jugador2.getPuntos()>40 &&jugador1.getPuntos()<40) {
+					System.out.println("Punto de "+jugador2.getNombre() );
+					return;
+				}
+					
+					
+				if(jugador1.getPuntos()==55 &&jugador2.getPuntos()==55) {
+					jugador1.restarPunto();
+					jugador2.restarPunto();
+				}
+				System.out.println("Punto de "+jugador2.getNombre());
+				if(jugador2.getPuntos()<70) {
+					
+					if(jugador2.getPuntos()==55) {
+						if(jugador1.getSaca()==true) {
+							System.out.print("*");
+						}
+						System.out.println(jugador1.getNombre()+": "+jugador1.getPuntos()+" /// Games: " + jugador1.getGamesGanados()+" /// Sets:" + jugador1.getSetsGanados());
+						if(jugador2.getSaca()==true) {
+							System.out.print("*");
+						}
+						System.out.println(jugador2.getNombre()+": "+"AD"+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
+						System.out.println();
+						}
+					else {
+						if(jugador1.getPuntos()==55) {
+							if(jugador1.getSaca()==true) {
 								System.out.print("*");
 							}
-							System.out.println(jugador2.getNombre()+": "+jugador2.getPuntos()+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
+							System.out.println(jugador1.getNombre()+": AD"+" /// Games: " + jugador1.getGamesGanados()+" /// Sets:" + jugador1.getSetsGanados());
+							
+							if(jugador2.getSaca()==true) {
+								System.out.print("*");
+							}System.out.println(jugador2.getNombre()+": "+jugador2.getPuntos()+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
 							System.out.println();
-							}
 						}
-					
-					}			
-				}
+						else {
+							if(jugador1.getSaca()==true) {
+								System.out.print("*");
+							}	
+						System.out.println(jugador1.getNombre()+": "+jugador1.getPuntos()+" /// Games: " + jugador1.getGamesGanados()+" /// Sets:" + jugador1.getSetsGanados());
+						if(jugador2.getSaca()==true) {
+							System.out.print("*");
+						}
+						System.out.println(jugador2.getNombre()+": "+jugador2.getPuntos()+" /// Games: " + jugador2.getGamesGanados()+" /// Sets:" + jugador2.getSetsGanados());
+						System.out.println();
+						}
+					}
 				
+				}			
+			}
+			
+			
+			
+			
+	}
+	private void jugarGame(Jugadores jugador1, Jugadores jugador2) {
+		
+		while((jugador1.getPuntos()<56 && jugador2.getPuntos()<56) ) { 
+			this.JugarPunto(jugador1, jugador2);
+			if(jugador1.getPuntos()>40 &&jugador2.getPuntos()<40) {
+				break;
+			}
+			if(jugador2.getPuntos()>40 &&jugador1.getPuntos()<40) {
+				break;
+			}
 				
+			
 				
-				
+			
 		}
 		
-		if(jugador1.getPuntos()>55) {
+		if(jugador1.getPuntos()>55 || (jugador1.getPuntos()>40 && jugador2.getPuntos()<40)) {
 			jugador1.sumarGame();
 			System.out.println("Gana el game "+ jugador1.getNombre()+" /// "+ jugador1.getNombre()+" " +jugador1.getGamesGanados()+" vs "+ jugador2.getNombre()+" "  + jugador2.getGamesGanados());
 		}
-		else {
+		if(jugador2.getPuntos()>55 || (jugador2.getPuntos()>40 && jugador1.getPuntos()<40)){
 			jugador2.sumarGame();
 			System.out.println("Gana el game "+ jugador2.getNombre()+"///"+ jugador1.getNombre()+" " +jugador1.getGamesGanados()+" vs "+ jugador2.getNombre()+" "  + jugador2.getGamesGanados());
 		}
