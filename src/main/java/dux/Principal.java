@@ -53,8 +53,8 @@ public class Principal {
 		try {	
 		
 			jugador1.setProbabilidadDeGanar(leer.nextDouble());
-			while(jugador1.getProbabilidadDeGanar()>100.0 ||  jugador1.getProbabilidadDeGanar()<0.0) {
-				System.out.println("Porcentaje incorrecto, debe ser entre 0% y 100%, ingrese de nuevo");
+			while(jugador1.getProbabilidadDeGanar()>100.0 ||  jugador1.getProbabilidadDeGanar()<1.0) {
+				System.out.println("Porcentaje incorrecto, debe ser entre 1% y 100%, ingrese de nuevo");
 				jugador1.setProbabilidadDeGanar(leer.nextDouble());
 		}
 		}
