@@ -85,12 +85,7 @@ public class Torneo{
 		
 			if((jugador1.getProbabilidadDeGanar()/100)!=0 && (jugador1.getProbabilidadDeGanar()/100)>numeroRandom) {
 				jugador1.sumarPunto();
-				
-				if(jugador1.getPuntos()>40 && jugador2.getPuntos()<40) {
-					
-					System.out.println("Punto de "+jugador1.getNombre());
-					return;
-				}
+
 				
 				if(jugador1.getPuntos()==55 &&jugador2.getPuntos()==55) {
 					jugador1.restarPunto();
@@ -145,11 +140,7 @@ public class Torneo{
 			}
 			else {
 				jugador2.sumarPunto();
-				if(jugador2.getPuntos()>40 &&jugador1.getPuntos()<40) {
-					System.out.println("Punto de "+jugador2.getNombre() );
-					return;
-				}
-					
+
 					
 				if(jugador1.getPuntos()==55 &&jugador2.getPuntos()==55) {
 					jugador1.restarPunto();
@@ -306,11 +297,17 @@ public class Torneo{
 			JugadoresBO jbo2=new JugadoresBO();
 			
 			
+			
 			String mensaje="";
 			mensaje=jbo1.agregarJugador(jugador1);
 			System.out.println(mensaje);
 			mensaje=jbo2.agregarJugador(jugador2);
 			System.out.println(mensaje);
+			
+			
+
+		       
+			
 			}
 	}
 	

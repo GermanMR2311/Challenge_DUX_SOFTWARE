@@ -9,7 +9,7 @@ public class Conexion {
 	private static Connection conn=null;
 	private static String login="HR";
 	private static String clave="hr";
-	private static String url="jdbc:oracle:thin:@//localhost:1521/XEPDB1";
+	private static String url="jdbc:oracle:thin:@//localhost:1521/xe";
 	
 	
 	public static Connection getConnection() {

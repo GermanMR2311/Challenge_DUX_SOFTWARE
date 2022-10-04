@@ -5,10 +5,10 @@ import java.sql.Connection;
 public class JugadoresBO {
 	private String mensaje="";
 	private JugadoresDAO jdao= new JugadoresDAO();
-	
+	Connection conn=Conexion.getConnection();
+
 	
 	public String agregarJugador(Jugadores jugador) {
-		Connection conn=Conexion.getConnection();
 		try {
 			mensaje=jdao.AgregarJugadores(conn, jugador);
 		}
@@ -27,4 +27,17 @@ public class JugadoresBO {
 		
 		
 	}
+	
+	public void mostrarJugadores() {
+		jdao.mostrarJugadores(conn);
 }
+	
+	public void editarJugador(String nombreACambiar, String nombreCambiado) {
+		jdao.editarJugador(conn, nombreACambiar, nombreCambiado);
+	}
+	
+	public Jugadores buscarJugador(String nombre) {
+		return jdao.buscarJugador(conn, nombre);
+		
+	}
+	}
