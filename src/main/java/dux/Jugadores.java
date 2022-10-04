@@ -1,7 +1,12 @@
 package dux;
 
+import java.util.Scanner;
 
 public class Jugadores {
+	
+	public Jugadores() {
+	
+	}
 	
 	public Jugadores(String nombre) {
 		super();
@@ -59,6 +64,10 @@ public class Jugadores {
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public void cargarNombre(Scanner leer,String a) {
+		System.out.println("Ingrese el nombre del jugador " + a);
+		this.setNombre(leer.next());
 	}
 	public int getPuntos() {
 		return puntos;

@@ -1,12 +1,19 @@
 package dux;
 import java.util.Random;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 public class Torneo{
 
 	private String nombreTorneo;
 	private double SetsTotales;
 	private String ganador;
-
+	Scanner leer= new  Scanner(System.in);
+	
+	public Torneo() {
+		
+	}
 	
 	public Torneo(String nombreTorneo) {
 		super();
@@ -18,12 +25,60 @@ public class Torneo{
 	public void setNombreTorneo(String nombreTorneo) {
 		this.nombreTorneo = nombreTorneo;
 	}
+	public void cargarNombreTorneo(Jugadores jugador1, Jugadores jugador2 ) {
+		System.out.println("Ingrese el nombre del torneo");
+		this.setNombreTorneo(leer.next());
+		jugador1.setTorneoJugado(this.getNombreTorneo());
+		jugador2.setTorneoJugado(this.getNombreTorneo());
+		
+	}
 	public double getSetsTotales() {
 		return SetsTotales;
 	}
 	public void setSetsTotales(double setsTotales){
 		SetsTotales = setsTotales;
 	}
+	public void cargarSets() {
+		System.out.println("Ingrese el mejor de que quiere jugar (Mejor de 3 o mejor de 5)");
+		
+		try{
+			do {
+			this.setSetsTotales(leer.nextInt());
+			if(this.getSetsTotales()!=3 &&  this.getSetsTotales()!=5) {
+				System.out.println("Escribio un numero incorrecto, debe ser 3 o 5");
+			}
+			}
+			while(this.getSetsTotales()!=3 &&  this.getSetsTotales()!=5);
+		}
+		catch (Exception e) {
+			System.out.println("A ocurrido el siguiente error " + e + " reinicie el programa, tenga en cuenta de ingresar solo numeros");
+				
+			}
+		
+	}
+	
+	
+	public void cargarPorbabilidadDeGanar(Jugadores jugador1, Jugadores jugador2) {
+		System.out.println("Ingrese la probabilidad de ganar del jugador 1");
+
+		try {	
+		
+			jugador1.setProbabilidadDeGanar(leer.nextDouble());
+			while(jugador1.getProbabilidadDeGanar()>100.0 ||  jugador1.getProbabilidadDeGanar()<1.0) {
+				System.out.println("Porcentaje incorrecto, debe ser entre 1% y 100%, ingrese de nuevo");
+				jugador1.setProbabilidadDeGanar(leer.nextDouble());
+		}
+		}
+		catch (Exception e) {
+			System.out.println("A ocurrido el siguiente error " + e + " reinicie el programa, tenga en cuenta de ingresar solo numeros");
+		}
+		jugador2.setProbabilidadDeGanar(100.0-jugador1.getProbabilidadDeGanar());
+		
+		System.out.println("La probabilidad de ganar de "+jugador1.getNombre()+" son de "+jugador1.getProbabilidadDeGanar()+"% y las de ganar de "+jugador2.getNombre()+" "+jugador2.getProbabilidadDeGanar()+"%");
+	}
+	
+	
+	
 	private void JugarPunto(Jugadores jugador1,Jugadores jugador2) {
 		Random generator = new Random();
 		double numeroRandom = generator.nextDouble();
@@ -206,6 +261,23 @@ public class Torneo{
 		
 	}
 	
+	public void jugarPartido(Jugadores jugador1, Jugadores jugador2) {
+		System.out.println("Empieza el partido");
+		this.jugarSets(jugador1, jugador2);
+		this.getGanador(jugador1, jugador2);
+	}
+	
+	public void revancha(boolean revancha) {
+		String valor=JOptionPane.showInputDialog("¿Quiere revancha?");
+        revancha = valor.equalsIgnoreCase("si");
+       if(revancha==true) {
+       	JOptionPane.showMessageDialog(null,"Empieza la revancha");
+       }
+       else {
+       	JOptionPane.showMessageDialog(null,"Partida terminada, Hasta luego");
+       }
+	}
+	
 	public String getGanador(Jugadores jugador1, Jugadores jugador2) {
 		if(jugador1.getSetsGanados()>jugador2.getSetsGanados()) {
 		System.out.println("Gana el torneo "+this.getNombreTorneo()+" "+ jugador1.getNombre()+": "+jugador1.getSetsGanados()+" a "+jugador2.getSetsGanados() );
@@ -218,6 +290,30 @@ public class Torneo{
 	public void setGanador(String ganador) {
 		this.ganador = ganador;
 	}
+	
+	public void jugarConRevancha(boolean revancha,Jugadores jugador1, Jugadores jugador2) {
+	
+		while(revancha==true) {
+			
+			
+			this.cargarNombreTorneo(jugador1, jugador2);
+			
+			this.cargarSets();
+			this.cargarPorbabilidadDeGanar(jugador1, jugador2);
+			this.jugarPartido(jugador1, jugador2);
+			this.revancha(revancha);	
+			JugadoresBO jbo1=new JugadoresBO();
+			JugadoresBO jbo2=new JugadoresBO();
+			
+			
+			String mensaje="";
+			mensaje=jbo1.agregarJugador(jugador1);
+			System.out.println(mensaje);
+			mensaje=jbo2.agregarJugador(jugador2);
+			System.out.println(mensaje);
+			}
+	}
+	
 	
 	
 }
