@@ -20,9 +20,10 @@ import oracle.security.crypto.core.RSA;
 public class JugadoresDAO {
 	
 	private String mensaje;
+	
 	public String AgregarJugadores(Connection conn, Jugadores jugador) {
 		PreparedStatement pst=null;
-		String sql="INSERT INTO JUGADORES (NOMBRE) "+ "VALUES( ?)";
+		String sql="INSERT INTO JUGADORES (NOMBRE, score) VALUES (?,0)";
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, jugador.getNombre());
@@ -40,18 +41,28 @@ public class JugadoresDAO {
 	
 	public void mostrarJugadores(Connection conn){
 		PreparedStatement pst=null;
-		String sql="select nombre from jugadores";
+		ResultSet rs=null;
+		String sql="select nombre, score from jugadores";
 		try {
 			pst=conn.prepareStatement(sql);
-			ResultSet rs= pst.executeQuery();
+			 rs= pst.executeQuery();
 			while (rs.next()) {
-                System.out.print(rs.getString(1));
+				String a=rs.getString(1);
+				while(a.length()<15) {
+					a=a+" ";
+				}
+                System.out.print(a);
+                System.out.println(" - "+ rs.getInt(2));
                 System.out.println("");
             }
+			
+			rs.close();
+			pst.execute();
+			pst.close();
 		}
-		catch (Exception e) {
+		catch (SQLException e) {
 			// TODO: handle exception
-			System.out.println(e);;
+			System.out.println(e);
 		}
 		
 		
@@ -66,36 +77,59 @@ public class JugadoresDAO {
 			pst=conn.prepareStatement(sql);
 			pst.setString(1, nombreCambiado);
 			pst.setString(2, nombreACambiar);
-
+			pst.execute();
+			pst.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}	
+		
 	}
 	public Jugadores buscarJugador(Connection conn,String nombre) {
 		
 		PreparedStatement pst=null;
-		String sql="select nombre from jugadores where nombre=?";
+		String sql="select nombre, score from jugadores where nombre=?";
 		ResultSet rs=null;
 		Jugadores jugador= new Jugadores();
 		try {
 			pst=conn.prepareStatement(sql);
 			pst.setString(1,nombre);
 			rs= pst.executeQuery();
+			while(rs.next()) {
+				jugador.setNombre(rs.getString("nombre"));
+				jugador.setScore(rs.getInt("score"));
+			}
+			pst.execute();
+			pst.close();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
-		try {
-			
-			jugador.setNombre(rs.getString(1).toString());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			
-			e.printStackTrace();
 		}
 		return jugador;
+	}
+	
+	public void actualizar(Connection conn,Jugadores jugador) {
+		PreparedStatement pst=null;
+		String sql="update jugadores set score=? where nombre=?";
+		System.out.println("Actualizando...");
+		try {
+			pst=conn.prepareStatement(sql);
+			pst.setInt(1, jugador.getScore());
+			pst.setString(2, jugador.getNombre());
+			pst.execute();
+			pst.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}	
+	}
+	
+	public void sumarScore(Connection conn,Jugadores jugador) {
+		Jugadores jugador1= new Jugadores(this.buscarJugador(conn, jugador.getNombre()));
+		jugador1.setScore(jugador1.getScore()+1);
+		this.actualizar(conn, jugador1);
+		
 	}
 	
 }
