@@ -26,7 +26,7 @@ public class JugadoresBO {
 	}
 	public void CrearJugador(Jugadores jugador, String nombre) {
 		boolean error=true;
-		while(error==true)
+		while(error==true) {
 		try {
 				jugador.setNombre(nombre);
 				this.agregarJugador(jugador);
@@ -36,7 +36,7 @@ public class JugadoresBO {
 			System.out.println("Nombre ya existente elegir otro");
 			error=false;
 		}
-		
+		}
 	}
 	
 	public void jugarExistente(Jugadores jugador, String nombre) {

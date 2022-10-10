@@ -213,7 +213,7 @@ public class CreacionPersonaje extends javax.swing.JFrame {
         // TODO add your handling code here:
     	if(controladorJugador2==false) {
     		controladorJugador2=true;
-    		jbo.CrearJugador(jugador2);
+    		jbo2.CrearJugador(jugador2);
     	}
     	else {
             JOptionPane.showMessageDialog(null, "Ya elegiste una opcion para este jugador");    	
@@ -225,7 +225,7 @@ public class CreacionPersonaje extends javax.swing.JFrame {
     	if(controladorJugador2==false){
     		controladorJugador2=true;
     		String nombre= JOptionPane.showInputDialog("Ingrese nombre del jugador que quiere usar");
-    		jbo.jugarExistente(jugador2, nombre);
+    		jbo2.jugarExistente(jugador2, nombre);
     	}
     	else {
             JOptionPane.showMessageDialog(null, "Ya elegiste una opcion para este jugador");    	
@@ -301,6 +301,7 @@ public class CreacionPersonaje extends javax.swing.JFrame {
     private boolean controladorJugador1=false;
     private boolean controladorJugador2=false; 
     JugadoresBO jbo=new JugadoresBO();
+    JugadoresBO jbo2=new JugadoresBO();
     Jugadores jugador1=new Jugadores();
     Jugadores jugador2=new Jugadores();
     Torneo torneo=new Torneo();
