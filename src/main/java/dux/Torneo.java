@@ -85,26 +85,24 @@ public class Torneo{
 
 	public void cargarPorbabilidadDeGanar(Jugadores jugador1, Jugadores jugador2) {
 		System.out.println("Ingrese la probabilidad de ganar del jugador 1");
-		int n1=0;
 		
-		do {
+		
 		try {	
 		
 			jugador1.setProbabilidadDeGanar(leer.nextDouble());
 			while(jugador1.getProbabilidadDeGanar()>100.0 ||  jugador1.getProbabilidadDeGanar()<1.0) {
 				System.out.println("Porcentaje incorrecto, debe ser entre 1% y 100%, ingrese de nuevo");
 				jugador1.setProbabilidadDeGanar(leer.nextDouble());
-				n1=1;
+				
 		}
 			
 		}
 		catch (Exception e) {
 			System.out.println("A ocurrido el siguiente error " + e + ", tenga en cuenta de ingresar solo numeros");
-			n1=0;
-			leer.nextLine();
+
 		}
-		}
-		while(n1==0);
+		
+
 		
 		
 		
